@@ -20,8 +20,7 @@
 
 #pragma mark - MAMapViewDelegate
 
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
-{
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation {
     /* 自定义userLocation对应的annotationView. */
     if ([annotation isKindOfClass:[MAUserLocation class]])
     {
@@ -29,8 +28,7 @@
         MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
         if (annotationView == nil)
         {
-            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
-                                                          reuseIdentifier:userLocationStyleReuseIndetifier];
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation  reuseIdentifier:userLocationStyleReuseIndetifier];
         }
         
         annotationView.image = [UIImage imageNamed:@"userPosition"];
@@ -43,8 +41,7 @@
     return nil;
 }
 
-- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
-{
+- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (!updatingLocation && self.userLocationAnnotationView != nil)
     {
         [UIView animateWithDuration:0.1 animations:^{
@@ -56,7 +53,7 @@
     }
 }
 
-- (MAMapView *)mapView{
+- (MAMapView *)mapView {
     if (!_mapView) {
         _mapView                     = [[MAMapView alloc] initWithFrame:self.view.bounds];
         self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -64,7 +61,7 @@
         _mapView.desiredAccuracy     = kCLLocationAccuracyBestForNavigation;
         _mapView.showsUserLocation   = YES;
         _mapView.userTrackingMode    = MAUserTrackingModeFollow;
-        // 关闭相机旋转 - 能够降低能耗，省电
+        // close rotateCamera
         _mapView.rotateCameraEnabled = NO;
         _mapView.showsScale          = NO;
         _mapView.rotateEnabled       = NO;
@@ -78,7 +75,7 @@
 
 #pragma mark - UI setup
 
-- (void)setupUI{
+- (void)setupUI {
     [self mapView];
 }
 

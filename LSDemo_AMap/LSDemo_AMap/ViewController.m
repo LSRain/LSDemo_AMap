@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#define MainViewControllerTitle @"LSDemo_AMap"
 
+#define MainViewControllerTitle @"LSDemo_AMap"
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView * _mainTableView;
@@ -22,8 +22,7 @@
 
 
 #pragma mark - tableView delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSArray *rows = [[_titles objectAtIndex:indexPath.section] allValues].firstObject;
@@ -31,23 +30,17 @@
     NSString *title = [[rows objectAtIndex:indexPath.row] allKeys].firstObject;
     
     UIViewController *subViewController = [[NSClassFromString(className) alloc] init];
-    NSString *xibBundlePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",className] ofType:@"xib"];
-    if (xibBundlePath.length) {
-        subViewController = [[NSClassFromString(className) alloc] initWithNibName:className bundle:nil];
-    }
     subViewController.title = title;
     
     [self.navigationController pushViewController:subViewController animated:YES];
 }
 
 #pragma mark - tableView DataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [_titles count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[[_titles objectAtIndex:section] allValues].firstObject count];
 }
 
@@ -55,8 +48,7 @@
     return 44;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *mainCellIdentifier = @"com.autonavi.mainCellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainCellIdentifier];
@@ -102,12 +94,12 @@
 }
 
 #pragma mark - init
-- (void)initTitles
-{
-    ///主页面标签title
-    _titles = @[@{@"位置相关" : @[
-                                  @{@"自定义旋转箭头":@"CustomUserLoactionViewController"},
-                          ]
+
+- (void)initTitles {
+    _titles = @[@{
+                    @"位置相关" : @[
+                                  @{@"自定义旋转箭头":@"CustomUserLoactionViewController"}
+                                  ]
                   }
                 ];
 }
@@ -131,8 +123,7 @@
     [self.view addSubview:_mainTableView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
