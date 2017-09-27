@@ -7,93 +7,138 @@
 //
 
 #import "ViewController.h"
-#import <MAMapKit/MAMapKit.h>
+#define MainViewControllerTitle @"LSDemo_AMap"
 
-@interface ViewController ()<MAMapViewDelegate>
-
-@property (nonatomic, strong) MAMapView *mapView;
-@property (nonatomic, strong) MAAnnotationView *userLocationAnnotationView;
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+{
+    UITableView * _mainTableView;
+    NSArray     * _titles;
+    NSArray     * _className;
+}
 
 @end
 
 @implementation ViewController
 
-#pragma mark - MAMapViewDelegate
 
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+#pragma mark - tableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /* 自定义userLocation对应的annotationView. */
-    if ([annotation isKindOfClass:[MAUserLocation class]])
-    {
-        static NSString *userLocationStyleReuseIndetifier = @"userLocationStyleReuseIndetifier";
-        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
-        if (annotationView == nil)
-        {
-            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
-                                                          reuseIdentifier:userLocationStyleReuseIndetifier];
-        }
-        
-        annotationView.image = [UIImage imageNamed:@"userPosition"];
-        
-        self.userLocationAnnotationView = annotationView;
-        
-        return annotationView;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSArray *rows = [[_titles objectAtIndex:indexPath.section] allValues].firstObject;
+    NSString *className = [[rows objectAtIndex:indexPath.row] allValues].firstObject;
+    NSString *title = [[rows objectAtIndex:indexPath.row] allKeys].firstObject;
+    
+    UIViewController *subViewController = [[NSClassFromString(className) alloc] init];
+    NSString *xibBundlePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",className] ofType:@"xib"];
+    if (xibBundlePath.length) {
+        subViewController = [[NSClassFromString(className) alloc] initWithNibName:className bundle:nil];
+    }
+    subViewController.title = title;
+    
+    [self.navigationController pushViewController:subViewController animated:YES];
+}
+
+#pragma mark - tableView DataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [_titles count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[[_titles objectAtIndex:section] allValues].firstObject count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *mainCellIdentifier = @"com.autonavi.mainCellIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainCellIdentifier];
+    NSArray *rows = [[_titles objectAtIndex:indexPath.section] allValues].firstObject;
+    NSString *className = [[rows objectAtIndex:indexPath.row] allValues].firstObject;
+    NSString *title = [[rows objectAtIndex:indexPath.row] allKeys].firstObject;
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainCellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        cell.detailTextLabel.numberOfLines = 0;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        cell.textLabel.textColor = [UIColor blackColor];
     }
     
-    return nil;
+    cell.detailTextLabel.text = className;
+    cell.textLabel.text = title;
+    
+    return cell;
 }
 
-- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _mainTableView.bounds.size.width, 40)];
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont systemFontOfSize:14];
+    label.textColor = [UIColor darkGrayColor];
+    label.text = [[_titles objectAtIndex:section] allKeys].firstObject;
+    label.numberOfLines = 1;
+    [label sizeToFit];
+    CGRect frame = label.frame;
+    frame.origin.x = 15;
+    frame.origin.y = header.bounds.size.height - frame.size.height;
+    label.frame = frame;
+    [header addSubview:label];
+    return header;
+}
+
+#pragma mark - init
+- (void)initTitles
 {
-    if (!updatingLocation && self.userLocationAnnotationView != nil)
-    {
-        [UIView animateWithDuration:0.1 animations:^{
-            
-            double degree = userLocation.heading.trueHeading - self.mapView.rotationDegree;
-            self.userLocationAnnotationView.transform = CGAffineTransformMakeRotation(degree * M_PI / 180.f );
-            
-        }];
-    }
+    ///主页面标签title
+    _titles = @[@{@"位置相关" : @[
+                                  @{@"自定义旋转箭头":@"CustomUserLoactionViewController"},
+                          ]
+                  }
+                ];
 }
 
-- (MAMapView *)mapView{
-    if (!_mapView) {
-        _mapView                     = [[MAMapView alloc] initWithFrame:self.view.bounds];
-        self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _mapView.zoomLevel           = 18.0;
-        _mapView.desiredAccuracy     = kCLLocationAccuracyBestForNavigation;
-        _mapView.showsUserLocation   = YES;
-        _mapView.userTrackingMode    = MAUserTrackingModeFollow;
-        // 关闭相机旋转 - 能够降低能耗，省电
-        _mapView.rotateCameraEnabled = NO;
-        _mapView.showsScale          = NO;
-        _mapView.rotateEnabled       = NO;
-        _mapView.showsIndoorMap      = YES;
-        _mapView.showsCompass        = NO;
-        _mapView.delegate = self;
-        [self.view addSubview:_mapView];
-    }
-    return _mapView;
-}
-
-#pragma mark - UI setup
-
-- (void)setupUI{
-    [self mapView];
-}
+#pragma mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    [self setupUI];
+    self.title = MainViewControllerTitle;
+    
+    [self initTitles];
+    
+    _mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _mainTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _mainTableView.sectionHeaderHeight = 10;
+    _mainTableView.sectionFooterHeight = 0;
+    _mainTableView.delegate = self;
+    _mainTableView.dataSource = self;
+    
+    [self.view addSubview:_mainTableView];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [self.navigationController setToolbarHidden:YES animated:animated];
 }
-
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5163A7FF1F7B934B00506460 /* CustomUserLoactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5163A7FE1F7B934B00506460 /* CustomUserLoactionViewController.m */; };
 		51C51B851F51866E00419392 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C51B841F51866E00419392 /* main.m */; };
 		51C51B881F51866E00419392 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C51B871F51866E00419392 /* AppDelegate.m */; };
 		51C51B8B1F51866E00419392 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C51B8A1F51866E00419392 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5163A7FD1F7B934B00506460 /* CustomUserLoactionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomUserLoactionViewController.h; sourceTree = "<group>"; };
+		5163A7FE1F7B934B00506460 /* CustomUserLoactionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomUserLoactionViewController.m; sourceTree = "<group>"; };
 		51C51B801F51866E00419392 /* LSDemo_AMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSDemo_AMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51C51B841F51866E00419392 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		51C51B861F51866E00419392 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5163A7FC1F7B931100506460 /* AMap */ = {
+			isa = PBXGroup;
+			children = (
+				5163A7FD1F7B934B00506460 /* CustomUserLoactionViewController.h */,
+				5163A7FE1F7B934B00506460 /* CustomUserLoactionViewController.m */,
+			);
+			path = AMap;
+			sourceTree = "<group>";
+		};
 		51C51B771F51866E00419392 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +77,7 @@
 		51C51B821F51866E00419392 /* LSDemo_AMap */ = {
 			isa = PBXGroup;
 			children = (
+				5163A7FC1F7B931100506460 /* AMap */,
 				51C51B861F51866E00419392 /* AppDelegate.h */,
 				51C51B871F51866E00419392 /* AppDelegate.m */,
 				51C51B891F51866E00419392 /* ViewController.h */,
@@ -229,6 +242,7 @@
 				51C51B8B1F51866E00419392 /* ViewController.m in Sources */,
 				51C51B881F51866E00419392 /* AppDelegate.m in Sources */,
 				51C51B851F51866E00419392 /* main.m in Sources */,
+				5163A7FF1F7B934B00506460 /* CustomUserLoactionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
