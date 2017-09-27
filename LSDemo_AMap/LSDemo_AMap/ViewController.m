@@ -9,18 +9,57 @@
 #import "ViewController.h"
 #import <MAMapKit/MAMapKit.h>
 
-@interface ViewController ()
+@interface ViewController ()<MAMapViewDelegate>
 
 @property (nonatomic, strong) MAMapView *mapView;
+@property (nonatomic, strong) MAAnnotationView *userLocationAnnotationView;
 
 @end
 
 @implementation ViewController
 
+#pragma mark - MAMapViewDelegate
+
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+{
+    /* 自定义userLocation对应的annotationView. */
+    if ([annotation isKindOfClass:[MAUserLocation class]])
+    {
+        static NSString *userLocationStyleReuseIndetifier = @"userLocationStyleReuseIndetifier";
+        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
+        if (annotationView == nil)
+        {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:userLocationStyleReuseIndetifier];
+        }
+        
+        annotationView.image = [UIImage imageNamed:@"userPosition"];
+        
+        self.userLocationAnnotationView = annotationView;
+        
+        return annotationView;
+    }
+    
+    return nil;
+}
+
+- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
+{
+    if (!updatingLocation && self.userLocationAnnotationView != nil)
+    {
+        [UIView animateWithDuration:0.1 animations:^{
+            
+            double degree = userLocation.heading.trueHeading - self.mapView.rotationDegree;
+            self.userLocationAnnotationView.transform = CGAffineTransformMakeRotation(degree * M_PI / 180.f );
+            
+        }];
+    }
+}
 
 - (MAMapView *)mapView{
     if (!_mapView) {
         _mapView                     = [[MAMapView alloc] initWithFrame:self.view.bounds];
+        self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _mapView.zoomLevel           = 18.0;
         _mapView.desiredAccuracy     = kCLLocationAccuracyBestForNavigation;
         _mapView.showsUserLocation   = YES;
@@ -31,6 +70,7 @@
         _mapView.rotateEnabled       = NO;
         _mapView.showsIndoorMap      = YES;
         _mapView.showsCompass        = NO;
+        _mapView.delegate = self;
         [self.view addSubview:_mapView];
     }
     return _mapView;
@@ -39,14 +79,14 @@
 #pragma mark - UI setup
 
 - (void)setupUI{
-    self.view.backgroundColor = [UIColor redColor];
+    [self mapView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self mapView];
+    [self setupUI];
 }
 
 
