@@ -8,6 +8,6 @@ target 'LSDemo_AMap' do
   # Pods for LSDemo_AMap
 
   # AMap
-  pod 'AMap3DMap', '~> 5.0.0'
+  pod 'AMap3DMap', '~> 5.3.0'
 
 end
