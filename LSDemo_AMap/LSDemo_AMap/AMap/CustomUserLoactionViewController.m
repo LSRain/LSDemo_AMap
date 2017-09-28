@@ -55,18 +55,18 @@
 
 - (MAMapView *)mapView {
     if (!_mapView) {
-        _mapView                     = [[MAMapView alloc] initWithFrame:self.view.bounds];
+        _mapView                      = [[MAMapView alloc] initWithFrame:self.view.bounds];
         self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _mapView.zoomLevel           = 18.0;
-        _mapView.desiredAccuracy     = kCLLocationAccuracyBestForNavigation;
-        _mapView.showsUserLocation   = YES;
-        _mapView.userTrackingMode    = MAUserTrackingModeFollow;
+        _mapView.zoomLevel            = 18.0;
+        _mapView.desiredAccuracy      = kCLLocationAccuracyBestForNavigation;
+        _mapView.showsUserLocation    = YES;
+        _mapView.userTrackingMode     = MAUserTrackingModeFollow;
         // close rotateCamera
-        _mapView.rotateCameraEnabled = NO;
-        _mapView.showsScale          = NO;
-        _mapView.rotateEnabled       = NO;
-        _mapView.showsIndoorMap      = YES;
-        _mapView.showsCompass        = NO;
+        _mapView.rotateCameraEnabled  = NO;
+        _mapView.showsScale           = NO;
+        _mapView.rotateEnabled        = NO;
+        _mapView.showsIndoorMap       = YES;
+        _mapView.showsCompass         = NO;
         _mapView.delegate = self;
         [self.view addSubview:_mapView];
     }
@@ -85,7 +85,6 @@
     
     [self setupUI];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
