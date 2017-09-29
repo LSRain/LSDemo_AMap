@@ -14,6 +14,7 @@
 		51C51B8E1F51866E00419392 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B8C1F51866E00419392 /* Main.storyboard */; };
 		51C51B901F51866E00419392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B8F1F51866E00419392 /* Assets.xcassets */; };
 		51C51B931F51866E00419392 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B911F51866E00419392 /* LaunchScreen.storyboard */; };
+		51DE4EC51F7E43AE009A1405 /* CustomAnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */; };
 		C084F40EB85E6AB170BFE723 /* libPods-LSDemo_AMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA6450DAB24D86A4FD6687A /* libPods-LSDemo_AMap.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,8 @@
 		51C51B8F1F51866E00419392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51C51B921F51866E00419392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51C51B941F51866E00419392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51DE4EC31F7E43AE009A1405 /* CustomAnnotationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationViewController.h; sourceTree = "<group>"; };
+		51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationViewController.m; sourceTree = "<group>"; };
 		ACA6450DAB24D86A4FD6687A /* libPods-LSDemo_AMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSDemo_AMap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68763815B631B6A82F84507 /* Pods-LSDemo_AMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSDemo_AMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSDemo_AMap/Pods-LSDemo_AMap.debug.xcconfig"; sourceTree = "<group>"; };
 		E00C4E366207C2B20B0BCE91 /* Pods-LSDemo_AMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSDemo_AMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSDemo_AMap/Pods-LSDemo_AMap.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,6 +55,8 @@
 			children = (
 				5163A7FD1F7B934B00506460 /* CustomUserLoactionViewController.h */,
 				5163A7FE1F7B934B00506460 /* CustomUserLoactionViewController.m */,
+				51DE4EC31F7E43AE009A1405 /* CustomAnnotationViewController.h */,
+				51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */,
 			);
 			path = AMap;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			files = (
 				51C51B8B1F51866E00419392 /* ViewController.m in Sources */,
 				51C51B881F51866E00419392 /* AppDelegate.m in Sources */,
+				51DE4EC51F7E43AE009A1405 /* CustomAnnotationViewController.m in Sources */,
 				51C51B851F51866E00419392 /* main.m in Sources */,
 				5163A7FF1F7B934B00506460 /* CustomUserLoactionViewController.m in Sources */,
 			);

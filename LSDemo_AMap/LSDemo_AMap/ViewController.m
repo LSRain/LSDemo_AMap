@@ -96,9 +96,12 @@
 #pragma mark - init
 
 - (void)initTitles {
-    _titles = @[@{
-                    @"位置相关" : @[
+    _titles = @[@{@"创建地图" : @[
                                   @{@"自定义旋转箭头":@"CustomUserLoactionViewController"}
+                                  ]
+                  },
+                @{@"在地图上绘制":@[
+                                  @{@"绘制点标记(自定义多点)":@"CustomAnnotationViewController"}
                                   ]
                   }
                 ];
