@@ -160,7 +160,6 @@
         return annotationView;
     }
     
-    
     return nil;
 }
 
