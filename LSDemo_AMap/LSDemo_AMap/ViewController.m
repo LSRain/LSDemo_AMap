@@ -101,7 +101,7 @@
                                   ]
                   },
                 @{@"在地图上绘制":@[
-                                  @{@"绘制点标记(自定义多点)":@"CustomAnnotationViewController"}
+                                  @{@"绘制点标记(自定义周围多点 + 固定屏幕点)":@"CustomAnnotationViewController"}
                                   ]
                   }
                 ];

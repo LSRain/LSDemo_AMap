@@ -54,9 +54,6 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(lockAction)];
-    
-    [self initAnnotations];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,8 +64,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.mapView addAnnotations:self.annotations];
+
+    [self initAnnotations]; // 不能写在`viewDidLoad`, 涉及到坐标点是否获取到的问题
 }
 
 - (void)initAnnotations {
@@ -80,12 +77,11 @@
             self.mapView.userLocation.coordinate.longitude + 0.00002
         },
         {
-            self.mapView.userLocation.coordinate.latitude + 0.000004,
-            self.mapView.userLocation.coordinate.longitude + 0.000014,
+            self.mapView.userLocation.coordinate.latitude + 0.00018,
+            self.mapView.userLocation.coordinate.longitude + 0.00019,
             
-        }
+        },
     };
-    
     
     for (int i = 0; i < 2; ++i)
     {
@@ -94,9 +90,11 @@
         [self.annotations addObject:a];
         if(i == 0) {
             a.lockedToScreen = YES;
-            a.lockedScreenPoint = CGPointMake(100, 100);
+            a.lockedScreenPoint = self.mapView.center;
         }
     }
+    
+    [self.mapView addAnnotations:self.annotations];
 }
 
 #pragma mark - event handling
@@ -107,12 +105,12 @@
 - (void)lockAction {
     MAPointAnnotation *an = self.annotations.firstObject;
     
-    [an setLockedScreenPoint:CGPointMake(200, 200)];
+    [an setLockedScreenPoint:self.mapView.center];
     [an setLockedToScreen:YES];
 }
 
 #pragma mark - MAMapviewDelegate
-// add
+
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (!updatingLocation && self.userLocationAnnotationView != nil)
     {
@@ -120,7 +118,6 @@
             
             double degree = userLocation.heading.trueHeading - self.mapView.rotationDegree;
             self.userLocationAnnotationView.transform = CGAffineTransformMakeRotation(degree * M_PI / 180.f );
-            
         }];
     }
 }
