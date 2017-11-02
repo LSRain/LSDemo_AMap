@@ -12,7 +12,6 @@
 @interface LSLinesOverlayViewController ()<MAMapViewDelegate>
 
 @property (nonatomic, strong) MAMapView *mapView;
-
 @property (nonatomic, strong) NSArray *lines;
 
 @end
@@ -46,7 +45,7 @@
 - (void)initLines {
     NSMutableArray *arr = [NSMutableArray array];
     
-    //line 1
+    //line 1 - 虚线
     CLLocationCoordinate2D line1Points[2];
     line1Points[0].latitude = 39.925539;
     line1Points[0].longitude = 116.279037;
@@ -57,8 +56,7 @@
     MAPolyline *line1 = [MAPolyline polylineWithCoordinates:line1Points count:2];
     [arr addObject:line1];
     
-    
-    //line 2
+    //line 2 - M
     CLLocationCoordinate2D line2Points[5];
     line2Points[0].latitude = 39.938698;
     line2Points[0].longitude = 116.275177;
@@ -82,15 +80,13 @@
 }
 
 #pragma mark - Action Handlers
-- (void)returnAction
-{
+- (void)returnAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - MAMapViewDelegate
 
-- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay
-{
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay {
     if ([overlay isKindOfClass:[MAPolyline class]])
     {
         MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
@@ -102,6 +98,7 @@
             polylineRenderer.lineCapType = kCGLineCapSquare;
             polylineRenderer.lineDash = YES;
         } else {
+            polylineRenderer.strokeColor = [UIColor greenColor];
             polylineRenderer.lineDash = NO;
         }
         
