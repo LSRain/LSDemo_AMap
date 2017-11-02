@@ -14,6 +14,7 @@
 		51C51B8E1F51866E00419392 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B8C1F51866E00419392 /* Main.storyboard */; };
 		51C51B901F51866E00419392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B8F1F51866E00419392 /* Assets.xcassets */; };
 		51C51B931F51866E00419392 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C51B911F51866E00419392 /* LaunchScreen.storyboard */; };
+		51CD2EA01FAB1C7F00E6C4EC /* LSLinesOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CD2E9F1FAB1C7F00E6C4EC /* LSLinesOverlayViewController.m */; };
 		51DE4EC51F7E43AE009A1405 /* CustomAnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */; };
 		C084F40EB85E6AB170BFE723 /* libPods-LSDemo_AMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA6450DAB24D86A4FD6687A /* libPods-LSDemo_AMap.a */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,8 @@
 		51C51B8F1F51866E00419392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51C51B921F51866E00419392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51C51B941F51866E00419392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51CD2E9E1FAB1C7F00E6C4EC /* LSLinesOverlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSLinesOverlayViewController.h; sourceTree = "<group>"; };
+		51CD2E9F1FAB1C7F00E6C4EC /* LSLinesOverlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSLinesOverlayViewController.m; sourceTree = "<group>"; };
 		51DE4EC31F7E43AE009A1405 /* CustomAnnotationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationViewController.h; sourceTree = "<group>"; };
 		51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationViewController.m; sourceTree = "<group>"; };
 		ACA6450DAB24D86A4FD6687A /* libPods-LSDemo_AMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSDemo_AMap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +60,8 @@
 				5163A7FE1F7B934B00506460 /* CustomUserLoactionViewController.m */,
 				51DE4EC31F7E43AE009A1405 /* CustomAnnotationViewController.h */,
 				51DE4EC41F7E43AE009A1405 /* CustomAnnotationViewController.m */,
+				51CD2E9E1FAB1C7F00E6C4EC /* LSLinesOverlayViewController.h */,
+				51CD2E9F1FAB1C7F00E6C4EC /* LSLinesOverlayViewController.m */,
 			);
 			path = AMap;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 		51C51B781F51866E00419392 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LS;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LSRain;
 				TargetAttributes = {
@@ -244,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51CD2EA01FAB1C7F00E6C4EC /* LSLinesOverlayViewController.m in Sources */,
 				51C51B8B1F51866E00419392 /* ViewController.m in Sources */,
 				51C51B881F51866E00419392 /* AppDelegate.m in Sources */,
 				51DE4EC51F7E43AE009A1405 /* CustomAnnotationViewController.m in Sources */,
